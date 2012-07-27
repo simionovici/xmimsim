@@ -35,6 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #ifdef MAC_INTEGRATION
+#import <Foundation/Foundation.h>
 #include <gtkosxapplication.h>
 #include <xmi_resources_mac.h>
 #endif
@@ -394,6 +395,15 @@ static void xmimsim_child_watcher_cb(GPid pid, gint status, struct child_data *c
 	if (nthreadsW != NULL)
 		gtk_widget_set_sensitive(nthreadsW,TRUE);	
 
+#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_8
+	NSUserNotification *notification = [[NSUserNotification alloc] init];
+	[notification setTitle:@"Hello World"];
+	[notification setInformativeText:@"Hello world message"];
+	//[notification setDeliveryDate:[NSDate dateWithTimeInterval:20 sinceDate:[NSDate date]]];
+	[notification setSoundName:NSUserNotificationDefaultSoundName];
+	NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
+	[center deliverNotification:notification];
+#endif
 	if (!success)
 		return; 
 
@@ -419,6 +429,7 @@ static void xmimsim_child_watcher_cb(GPid pid, gint status, struct child_data *c
 	
 #ifdef MAC_INTEGRATION
 	gtk_osxapplication_attention_request(g_object_new(GTK_TYPE_OSX_APPLICATION, NULL), CRITICAL_REQUEST);
+
 #endif
 	g_free(cd->outputfile);
 	g_free(cd);
