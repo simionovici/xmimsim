@@ -41,6 +41,7 @@
 
 <data>${prefix:macports}/share/themes</data>
 <data>${prefix:install}/share/icons/hicolor</data>
+<data dest="${bundle}/Contents/Resources/English.lproj/InfoPlist.strings">${prefix:source}/osx/English.lproj/InfoPlist.strings</data>
 <data dest="${bundle}/Contents/Resources/share/mime/packages/applications-x-xmimsim.xml">${prefix:source}/icons/applications-x-xmimsim.xml</data>
 
 <data dest='${bundle}/Contents/Resources/etc/gtk-2.0/gtkrc'>${prefix:source}/osx/gtkrc</data>
